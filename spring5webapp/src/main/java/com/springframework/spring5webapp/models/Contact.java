@@ -1,12 +1,19 @@
 package com.springframework.spring5webapp.models;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Contact {
@@ -17,7 +24,8 @@ public class Contact {
 	
 	private String email;
 	
-	private List<Phone> phone = new ArrayList();
+	@OneToMany(mappedBy="contact", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<Phone> phone = new HashSet<>();
 	
 	public Contact() {
 		// TODO Auto-generated constructor stub
@@ -54,15 +62,21 @@ public class Contact {
 	/**
 	 * @return the phone
 	 */
-	public List<Phone> getPhone() {
+	public Set<Phone> getPhone() {
 		return phone;
 	}
 
 	/**
 	 * @param phone the phone to set
 	 */
-	public void setPhone(List<Phone> phone) {
+	public void setPhone(Set<Phone> phone) {
 		this.phone = phone;
 	}
+
+
+
+
+
+	
 
 }
