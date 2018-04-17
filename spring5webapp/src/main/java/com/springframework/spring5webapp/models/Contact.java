@@ -92,13 +92,7 @@ public class Contact {
 		this.email = email;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Contact [id=" + id + ", email=" + email + ", phone=" + phone + "]";
-	}
+
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -111,6 +105,7 @@ public class Contact {
 		return result;
 	}
 
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
