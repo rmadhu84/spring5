@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Contact {
+public class ContactDto {
 
 	@Id
 	@GeneratedValue(strategy  = GenerationType.AUTO)
@@ -26,9 +26,9 @@ public class Contact {
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "contact_id", referencedColumnName = "id")
-	private Set<Phone> phone = new HashSet<>();
+	private Set<PhoneDto> phone = new HashSet<>();
 	
-	public Contact() {
+	public ContactDto() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -63,14 +63,14 @@ public class Contact {
 	/**
 	 * @return the phone
 	 */
-	public Set<Phone> getPhone() {
+	public Set<PhoneDto> getPhone() {
 		return phone;
 	}
 
 	/**
 	 * @param phone the phone to set
 	 */
-	public void setPhone(Set<Phone> phone) {
+	public void setPhone(Set<PhoneDto> phone) {
 		this.phone = phone;
 	}
 
@@ -80,7 +80,7 @@ public class Contact {
 	 * @param email
 	 * @param phone
 	 */
-	public Contact(String email, Set<Phone> phone) {
+	public ContactDto(String email, Set<PhoneDto> phone) {
 		this.email = email;
 		this.phone = phone;
 	}
@@ -88,7 +88,7 @@ public class Contact {
 	/**
 	 * @param email
 	 */
-	public Contact(String email) {
+	public ContactDto(String email) {
 		this.email = email;
 	}
 
@@ -117,7 +117,7 @@ public class Contact {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Contact other = (Contact) obj;
+		ContactDto other = (ContactDto) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
