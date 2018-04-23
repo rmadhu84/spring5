@@ -1,9 +1,20 @@
 package com.springframework.spring5webapp.POJO;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import com.springframework.spring5webapp.models.PhoneDto;
+
 public class Contact {
 	
 	private String email;
-	private String no;
+	private Set<Phone> phone = new HashSet<>();
+
+
+	public Contact() {
+		// TODO Auto-generated constructor stub
+	}
+
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -13,17 +24,10 @@ public class Contact {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((no == null) ? 0 : no.hashCode());
+		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Contact [email=" + email + ", no=" + no + "]";
-	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
@@ -42,23 +46,14 @@ public class Contact {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (no == null) {
-			if (other.no != null)
+		if (phone == null) {
+			if (other.phone != null)
 				return false;
-		} else if (!no.equals(other.no))
+		} else if (!phone.equals(other.phone))
 			return false;
 		return true;
 	}
 
-	/**
-	 * @param email
-	 * @param no
-	 */
-	public Contact(String email, String no) {
-		super();
-		this.email = email;
-		this.no = no;
-	}
 
 	/**
 	 * @return the email
@@ -67,6 +62,7 @@ public class Contact {
 		return email;
 	}
 
+
 	/**
 	 * @param email the email to set
 	 */
@@ -74,22 +70,29 @@ public class Contact {
 		this.email = email;
 	}
 
-	/**
-	 * @return the no
-	 */
-	public String getNo() {
-		return no;
-	}
 
 	/**
-	 * @param no the no to set
+	 * @return the phone
 	 */
-	public void setNo(String no) {
-		this.no = no;
+	public Set<Phone> getPhone() {
+		return phone;
 	}
 
-	public Contact() {
-		// TODO Auto-generated constructor stub
+
+	/**
+	 * @param phone the phone to set
+	 */
+	public void setPhone(Set<Phone> phone) {
+		this.phone = phone;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Contact [email=" + email + ", phone=" + phone + "]";
 	}
 
 }
