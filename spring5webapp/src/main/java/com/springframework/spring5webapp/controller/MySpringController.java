@@ -21,15 +21,20 @@ public class MySpringController {
 	ContactRepository contactRepo;
 	
 	@RequestMapping(value="/addContact")
-	public ContactDto addContact(@RequestBody Contact contact) {
+	public ContactDto addContact(@RequestBody ContactDto contact) {
 		
 		ContactDto contactDto = new ContactDto();
-		BeanUtils.copyProperties(contact, contactDto);
+		//BeanUtils.copyProperties(contact, contactDto);
 		contactRepo.save(contactDto);
 
 		return contactDto;
 	}
 
+	@RequestMapping(value="/addContactTest")
+	public Contact addContactTest(@RequestBody Contact contact) {
+	
+		return contact;
+	}
 	@RequestMapping("/greet")
 	public Greeting greet(@RequestParam(value="name", defaultValue="World") String name) {
 
