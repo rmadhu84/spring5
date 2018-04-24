@@ -13,17 +13,17 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class PhoneDto {
+public class Phone {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String type;
 
 	private String no;
 
-	public PhoneDto() {
+	public Phone() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -98,7 +98,7 @@ public class PhoneDto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PhoneDto other = (PhoneDto) obj;
+		Phone other = (Phone) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

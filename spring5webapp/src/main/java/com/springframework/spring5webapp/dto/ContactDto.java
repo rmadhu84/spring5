@@ -1,17 +1,17 @@
-package com.springframework.spring5webapp.POJO;
+package com.springframework.spring5webapp.dto;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import com.springframework.spring5webapp.models.PhoneDto;
+import com.springframework.spring5webapp.models.Phone;
 
-public class Contact {
+public class ContactDto {
 	
 	private String email;
 	private Set<Phone> phone = new HashSet<>();
 
 
-	public Contact() {
+	public ContactDto() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -40,7 +40,7 @@ public class Contact {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Contact other = (Contact) obj;
+		ContactDto other = (ContactDto) obj;
 		if (email == null) {
 			if (other.email != null)
 				return false;

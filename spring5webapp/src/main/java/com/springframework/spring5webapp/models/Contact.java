@@ -16,19 +16,19 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class ContactDto {
+public class Contact {
 
 	@Id
-	@GeneratedValue(strategy  = GenerationType.AUTO)
+	@GeneratedValue(strategy  = GenerationType.IDENTITY)
 	private Long id;
 	
 	private String email;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "contact_id", referencedColumnName = "id")
-	private Set<PhoneDto> phone = new HashSet<>();
+	private Set<Phone> phone = new HashSet<>();
 	
-	public ContactDto() {
+	public Contact() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -63,14 +63,14 @@ public class ContactDto {
 	/**
 	 * @return the phone
 	 */
-	public Set<PhoneDto> getPhone() {
+	public Set<Phone> getPhone() {
 		return phone;
 	}
 
 	/**
 	 * @param phone the phone to set
 	 */
-	public void setPhone(Set<PhoneDto> phone) {
+	public void setPhone(Set<Phone> phone) {
 		this.phone = phone;
 	}
 
@@ -80,7 +80,7 @@ public class ContactDto {
 	 * @param email
 	 * @param phone
 	 */
-	public ContactDto(String email, Set<PhoneDto> phone) {
+	public Contact(String email, Set<Phone> phone) {
 		this.email = email;
 		this.phone = phone;
 	}
@@ -88,7 +88,7 @@ public class ContactDto {
 	/**
 	 * @param email
 	 */
-	public ContactDto(String email) {
+	public Contact(String email) {
 		this.email = email;
 	}
 
@@ -117,7 +117,7 @@ public class ContactDto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ContactDto other = (ContactDto) obj;
+		Contact other = (Contact) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

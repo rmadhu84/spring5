@@ -1,4 +1,4 @@
-package com.springframework.spring5webapp.POJO;
+package com.springframework.spring5webapp.dto;
 
 public class Greeting {
 

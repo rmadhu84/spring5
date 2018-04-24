@@ -1,6 +1,6 @@
-package com.springframework.spring5webapp.POJO;
+package com.springframework.spring5webapp.dto;
 
-public class Phone {
+public class PhoneDto {
 
 	private Long id;
 	private String type;
@@ -44,7 +44,7 @@ public class Phone {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Phone other = (Phone) obj;
+		PhoneDto other = (PhoneDto) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -108,7 +108,7 @@ public class Phone {
 		this.no = no;
 	}
 
-	public Phone() {
+	public PhoneDto() {
 		// TODO Auto-generated constructor stub
 	}
 
