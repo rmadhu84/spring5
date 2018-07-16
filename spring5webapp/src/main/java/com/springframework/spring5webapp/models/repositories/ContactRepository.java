@@ -10,6 +10,7 @@ import com.springframework.spring5webapp.models.Contact;
 public interface ContactRepository extends CrudRepository<Contact, Long>{
 	
 	public Optional<Contact> findById(Long id);
-	public Contact findByEmail(String email);
+	public List<Contact> findByEmail(String email);
+	public Iterable<Contact> findAll();
 
 }
