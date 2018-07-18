@@ -21,6 +21,7 @@ import com.springframework.spring5webapp.dto.ContactDto;
 import com.springframework.spring5webapp.dto.Greeting;
 import com.springframework.spring5webapp.models.Contact;
 import com.springframework.spring5webapp.models.repositories.ContactRepository;
+import com.springframework.spring5webapp.service.ContactService;
 
 @RestController
 public class MySpringController {
@@ -28,56 +29,41 @@ public class MySpringController {
 
 	@Autowired
 	ContactRepository contactRepo;
+	
+	@Autowired
+	ContactService contactService;
 
 	@RequestMapping(value = "/addContact")
-	public Contact addContact(@RequestBody Contact contact) {
-
-		Contact contactDto = new Contact();
-		BeanUtils.copyProperties(contact, contactDto);
-		contactRepo.save(contactDto);
-
-		return contact;
+	public Contact addContact(@RequestBody ContactDto contactDto) {
+		Contact contact = new Contact();
+		BeanUtils.copyProperties(contactDto, contact);
+		return contactService.addContact(contact);
 	}
 	
 	@GetMapping(value="/findByEmail")
-	public ResponseEntity<List> findByEmail(@RequestParam(value = "email") String email) {
-		System.out.println("Find by Email1");
-		ContactDto contactDto;
-		List<ContactDto> list = new ArrayList<ContactDto>();
-		for(Contact contact : contactRepo.findByEmail(email)) {
-			contactDto  = new ContactDto();
-			BeanUtils.copyProperties(contact, contactDto);
-			list.add(contactDto);
-		}
-		
-		System.out.println("Find by Email");
-		return new ResponseEntity<List>(list, HttpStatus.OK);
-		
+	public ResponseEntity<List<ContactDto>> findByEmail(@RequestParam(value = "email") String email) {
+		return new ResponseEntity<List<ContactDto>>(contactService.findByEmail(email), HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/findById")
 	public ResponseEntity<ContactDto> findById(@RequestParam("id") Integer id) {
-		System.out.println("Find by Id");
-		ContactDto contactDto = new ContactDto();
-		Optional<Contact> contact = contactRepo.findById(new Long(id));
-		BeanUtils.copyProperties(contact.get(), contactDto);
-		
-		
-		return new ResponseEntity<ContactDto>(contactDto, HttpStatus.OK);
-		
+		return new ResponseEntity<ContactDto>(contactService.findById(id), HttpStatus.OK);
 	}
 
 	@RequestMapping("/greet")
 	public Greeting greet(@RequestParam(value = "name", defaultValue = "World") String name) {
-
 		return new Greeting(String.format(template, name));
 	}
 	
 	@RequestMapping("/getAll")
 	public List<Contact> getAllContacts(){
-		List<Contact> list = new ArrayList<Contact>();
-		contactRepo.findAll().forEach(e -> list.add(e));
-		return list;
+		return contactService.getAllContacts();
+	}
+	
+	@RequestMapping("/update")
+	public String updateContact(@RequestBody ContactDto contactDto) {
+		
+		return contactService.updateContact(contactDto);
 	}
 	
 
