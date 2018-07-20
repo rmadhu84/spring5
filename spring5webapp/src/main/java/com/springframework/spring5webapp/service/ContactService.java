@@ -20,7 +20,7 @@ import com.springframework.spring5webapp.models.Contact;
  */
 
 public interface ContactService {
-	public Contact addContact(Contact contact);
+	public ContactDto addContact(ContactDto contactDto);
 	public List<ContactDto> findByEmail(String email);
 	public ContactDto findById(Integer id);
 	public List<Contact> getAllContacts();

@@ -1,8 +1,12 @@
 package com.springframework.spring5webapp.service.serviceImpl;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +15,9 @@ import org.springframework.stereotype.Service;
 
 import com.springframework.spring5webapp.dto.ContactDto;
 import com.springframework.spring5webapp.dto.Greeting;
+import com.springframework.spring5webapp.dto.PhoneDto;
 import com.springframework.spring5webapp.models.Contact;
+import com.springframework.spring5webapp.models.Phone;
 import com.springframework.spring5webapp.models.repositories.ContactRepository;
 
 @Service
@@ -24,9 +30,25 @@ public class ContactServiceImpl implements com.springframework.spring5webapp.ser
 		// TODO Auto-generated constructor stub
 	}
 
-	public Contact addContact(Contact contact) {
-		contactRepo.save(contact);
-		return contact;
+	public ContactDto addContact(ContactDto contactDto) {
+		
+		Contact contact = new Contact();
+		BeanUtils.copyProperties(contactDto, contact, "phone");
+		
+		Set<Phone> setp = new HashSet<Phone>();
+		
+		for(PhoneDto p : contactDto.getPhone()) {
+			Phone phone = new Phone();
+			phone.setNo(p.getNo());
+			phone.setType(p.getType());
+			setp.add(phone);
+		
+		}
+		
+		contact.getPhone().addAll(setp);
+		//contactRepo.save(contact);
+		BeanUtils.copyProperties(contactRepo.save(contact), contactDto);
+		return contactDto;
 	}
 
 	@Override
@@ -66,5 +88,6 @@ public class ContactServiceImpl implements com.springframework.spring5webapp.ser
 		contactRepo.save(contact);
 		return new String("Contact Saved");
 	}
+	
 
 }

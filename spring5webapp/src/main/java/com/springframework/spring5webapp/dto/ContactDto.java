@@ -3,12 +3,12 @@ package com.springframework.spring5webapp.dto;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.springframework.spring5webapp.models.Phone;
+import com.springframework.spring5webapp.dto.PhoneDto;
 
 public class ContactDto {
 	private Long id;
 	private String email;
-	private Set<Phone> phone = new HashSet<>();
+	private Set<PhoneDto> phone = new HashSet<>();
 
 
 	public ContactDto() {
@@ -33,7 +33,7 @@ public class ContactDto {
 	/**
 	 * @return the phone
 	 */
-	public Set<Phone> getPhone() {
+	public Set<PhoneDto> getPhone() {
 		return phone;
 	}
 
@@ -41,7 +41,7 @@ public class ContactDto {
 	/**
 	 * @param phone the phone to set
 	 */
-	public void setPhone(Set<Phone> phone) {
+	public void setPhone(Set<PhoneDto> phone) {
 		this.phone = phone;
 	}
 
