@@ -1,0 +1,1 @@
+SELECT * FROM AUTHOR a, AUTHOR_BOOK ab, BOOK b where ab.author_id = a.id and ab.book_id = b.id

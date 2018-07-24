@@ -14,32 +14,4 @@ public class Spring5webappApplication {
 		
 		SpringApplication.run(Spring5webappApplication.class, args);
 	}
-	
-//	@Bean
-//	public CommandLineRunner demo(ContactRepository repo) {
-//		Contact contact = new Contact();
-//		return(args) ->{
-//			Set<Phone> cp = new HashSet<>();
-//
-//			Phone phone = new Phone();
-//
-//			phone.setType("Mobile");
-//			phone.setNo("517-507-9422");
-//			cp.add(phone);
-//
-//			phone = new Phone();
-//			phone.setType("Home");
-//			phone.setNo("517-879-0942");
-//			cp.add(phone);
-//			contact.setEmail("r.madhu.84@gmail.com");
-//			contact.setPhone(cp);
-//			repo.save(contact);
-//			log.info("Finding all contacts ---> ");
-//			log.info("--------------------------");
-//			for(Contact c: repo.findAll()) {
-//				log.info(c.toString());
-//			}
-//
-//		};
-//	}
 }

@@ -15,6 +15,7 @@ import com.springframework.spring5webapp.dto.BookDto;
 import com.springframework.spring5webapp.dto.ContactDto;
 import com.springframework.spring5webapp.dto.Greeting;
 import com.springframework.spring5webapp.models.Contact;
+import com.springframework.spring5webapp.service.BookService;
 import com.springframework.spring5webapp.service.ContactService;
 
 @RestController
@@ -24,6 +25,8 @@ public class MySpringController {
 	@Autowired
 	ContactService contactService;
 	
+	@Autowired
+	BookService bookService;
 
 	@RequestMapping(value = "/addContact")
 	public ContactDto addContact(@RequestBody ContactDto contactDto) {
@@ -60,8 +63,14 @@ public class MySpringController {
 	}
 	
 	@RequestMapping("/addBook")
-	public void addBook(@RequestBody BookDto bookDto) {
-		System.out.println(bookDto.toString());
+	public BookDto addBook(@RequestBody BookDto bookDto) {
+		return bookService.addBook(bookDto);
+		
+	}
+	
+	@RequestMapping("/fetchAllBooks")
+	public List<BookDto> fetchAllBooks(){
+		return bookService.fetchAllBooks();
 	}
 
 	public MySpringController() {
