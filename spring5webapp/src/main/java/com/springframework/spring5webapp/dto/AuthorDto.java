@@ -18,6 +18,19 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 public class AuthorDto implements Serializable{
 
 	/**
+	 * @param id
+	 * @param firstName
+	 * @param lastName
+	 * @param books
+	 */
+	public AuthorDto(Long id, String firstName, String lastName, List<BookDto> books) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.books = books;
+	}
+
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1171007862458306973L;
