@@ -14,9 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 /**
  * @author ramachandranm1
  *
@@ -31,65 +28,32 @@ public class Author {
 	private String firstName;
 	private String lastName;
 	
-	@ManyToMany(mappedBy="authors", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToMany(mappedBy="authors", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<Book> books = new HashSet<Book>();
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
-	@Override
+	/*@Override
 	public String toString() {
 		return "Author [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", books=" + books + "]";
-	}
+	}*/
+	
+	  @Override
+	    public String toString() {
+	        String result = String.format(
+	                "Author [id=%d, firstName='%s', lastName='%s']%n",
+	                id, firstName, lastName);
+	        if (books != null) {
+	            for(Book book : books) {
+	                result += String.format(
+	                        "Book[id=%d, ISBN='%s', Title='%s']%n",
+	                        book.getId(), book.getISBN(), book.getTitle());
+	            }
+	        }
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((books == null) ? 0 : books.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		return result;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Author other = (Author) obj;
-		if (books == null) {
-			if (other.books != null)
-				return false;
-		} else if (!books.equals(other.books))
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		return true;
-	}
+	        return result;
+	    }
 
 	/**
 	 * @return the id
@@ -136,6 +100,7 @@ public class Author {
 	/**
 	 * @return the books
 	 */
+	
 	public Set<Book> getBooks() {
 		return books;
 	}
@@ -154,6 +119,23 @@ public class Author {
 	 */
 	public Author() {
 		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param firstName
+	 * @param lastName
+	 * @param books
+	 */
+	public Author(String firstName, String lastName, Set<Book> books) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.books = books;
+	}
+
+	public Author(String firstName, String lastName) {
+		// TODO Auto-generated constructor stub
+		 this.firstName = firstName;
+		 this.lastName = lastName;
 	}
 
 }

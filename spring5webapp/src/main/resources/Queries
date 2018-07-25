@@ -1,1 +1,4 @@
-SELECT * FROM AUTHOR a, AUTHOR_BOOK ab, BOOK b where ab.author_id = a.id and ab.book_id = b.id
+SELECT a.id AS author_id, a.first_name, a.last_name, b.id AS book_id, b.title, b.isbn
+  FROM AUTHOR a, AUTHOR_BOOK ab, BOOK b
+ WHERE ab.author_id = a.id
+       AND ab.book_id = b.id;

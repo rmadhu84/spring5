@@ -15,12 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.springframework.spring5webapp.dto.AuthorDto;
 
 /**
  * @author ramachandranm1
@@ -36,11 +30,23 @@ public class Book {
 	private String ISBN;
 	private String title;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id"))
 	private Set<Author> authors = new HashSet<Author>();
 
-	
+
+	/**
+	 * @param iSBN
+	 * @param title
+	 * @param authors
+	 */
+	public Book(String title, String iSBN, Set<Author> authors) {
+		ISBN = iSBN;
+		this.title = title;
+		this.authors = authors;
+	}
+
+
 	/**
 	 * 
 	 */
@@ -52,11 +58,23 @@ public class Book {
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
-	@Override
+	/*@Override
 	public String toString() {
 		return "Book [id=" + id + ", ISBN=" + ISBN + ", title=" + title + ", authors=" + authors + "]";
-	}
+	}*/
 
+	 @Override
+	    public String toString() {
+	        String result = String.format(
+	                "Book [id=%d, ISBN='%s', Title='%s']%n",
+	                id, ISBN, title);
+	        if(authors != null) {	        	
+	        	for(Author author : authors) {
+	        		result +=String.format("Author[id=%d, FirstName='%s', LastName='%s']%n", author.getId().intValue(), author.getFirstName(), author.getLastName());
+	        	}
+	        }
+	        return result;
+	    }
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -160,6 +178,7 @@ public class Book {
 	/**
 	 * @return the authors
 	 */
+
 	public Set<Author> getAuthors() {
 		return authors;
 	}
