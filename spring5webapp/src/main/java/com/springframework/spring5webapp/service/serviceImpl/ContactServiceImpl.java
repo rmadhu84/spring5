@@ -84,7 +84,19 @@ public class ContactServiceImpl implements com.springframework.spring5webapp.ser
 	public String updateContact(ContactDto contactDto) {
 		// TODO Auto-generated method stub
 		Contact contact = new Contact();
-		BeanUtils.copyProperties(contactDto, contact);
+		BeanUtils.copyProperties(contactDto, contact, "phone");
+		
+		Set<Phone> setp = new HashSet<Phone>();
+		
+		for(PhoneDto p : contactDto.getPhone()) {
+			Phone phone = new Phone();
+			phone.setNo(p.getNo());
+			phone.setType(p.getType());
+			setp.add(phone);
+		
+		}
+		
+		contact.getPhone().addAll(setp);
 		contactRepo.save(contact);
 		return new String("Contact Saved");
 	}
