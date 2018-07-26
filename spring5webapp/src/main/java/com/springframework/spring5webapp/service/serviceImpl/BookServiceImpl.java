@@ -83,7 +83,7 @@ public class BookServiceImpl implements BookService {
 			add(AuthorB);
 		}});*/
 
-		bookRep.save(book);
+		book = bookRep.save(book);
 		/*bookRep.save(book1);*/
 
 
@@ -107,7 +107,7 @@ public class BookServiceImpl implements BookService {
     			authors.add(authorDto);
     		}
     		
-    		BookDto bookDto = new BookDto(book.getId(), book.getTitle(), book.getISBN(), authors);
+    		BookDto bookDto = new BookDto(book.getId(), book.getISBN(), book.getTitle(),  authors);
     		list.add(bookDto);
             
         }
