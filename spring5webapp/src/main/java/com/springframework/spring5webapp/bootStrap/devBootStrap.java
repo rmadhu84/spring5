@@ -46,23 +46,39 @@ public class devBootStrap implements ApplicationListener<ContextRefreshedEvent>{
 	}
 	
 	private void initData() { //Eric
-        Author eric = new Author("Eric", "Evans");
-        Book  ddd = new Book("Domain Driven Design", "1234");
-        eric.getBooks().add(ddd);
-        ddd.getAuthors().add(eric);
+		Author eric = new Author("Eric", "Evans");
+		Book  ddd = new Book("Domain Driven Design", "1234");
+		eric.getBooks().add(ddd);
+		ddd.getAuthors().add(eric);
 
-        authorRepo.save(eric);
-        bookRepo.save(ddd);
+		authorRepo.save(eric);
+		bookRepo.save(ddd);
 
 
-        //Rod
-        Author rod = new Author("Rod", "Johnson");
-        Book noEJB = new Book("J2EE Development without EJB", "23444");
-        rod.getBooks().add(noEJB);
-        noEJB.getAuthors().add(rod);
+		//Rod
+		Author rod = new Author("Rod", "Johnson");
+		Book noEJB = new Book("J2EE Development without EJB", "23444");
+		rod.getBooks().add(noEJB);
+		noEJB.getAuthors().add(rod);
 
-        authorRepo.save(rod);
-        bookRepo.save(noEJB);}
+		authorRepo.save(rod);
+		bookRepo.save(noEJB);
+		
+		Author john = new Author("John", "Dow");
+		Author jane = new Author("Jane", "Doe");
+	    Book  hfj = new Book("Head First Java", "123-456-789", new HashSet<Author>(){{
+			add(john);
+			add(jane);
+		}});
+	    
+	   bookRepo.save(hfj);
+	   
+	}
+	
+	
+	
+	
+	
 	
 
 }

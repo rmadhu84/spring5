@@ -118,7 +118,7 @@ public class BookServiceImpl implements BookService {
         	logger.info(author.toString());
         }
         
-        
+        logger.info(authorRep.findByFirstNameAndLastName("Eric","Evans").get(0).toString());
         
 		return list;
 	}
