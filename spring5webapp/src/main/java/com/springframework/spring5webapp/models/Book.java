@@ -29,6 +29,18 @@ public class Book {
 	private Long id;
 	private String ISBN;
 	private String title;
+	
+
+	/**
+	 * @param iSBN
+	 * @param title
+	 */
+	public Book(String iSBN, String title) {
+		super();
+		ISBN = iSBN;
+		this.title = title;
+	}
+
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id"))
