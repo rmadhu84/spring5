@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.springframework.spring5webapp.dto.ContactDto;
@@ -16,7 +17,7 @@ import com.springframework.spring5webapp.models.Contact;
 import com.springframework.spring5webapp.models.Phone;
 import com.springframework.spring5webapp.models.repositories.ContactRepository;
 
-@Service
+@Repository
 public class ContactServiceImpl implements com.springframework.spring5webapp.service.ContactService {
 
 	@Autowired
