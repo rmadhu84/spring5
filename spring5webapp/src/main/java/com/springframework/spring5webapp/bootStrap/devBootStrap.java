@@ -8,17 +8,21 @@ import java.util.HashSet;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.springframework.spring5webapp.models.Author;
 import com.springframework.spring5webapp.models.Book;
+import com.springframework.spring5webapp.models.Publisher;
 import com.springframework.spring5webapp.models.repositories.AuthorRepository;
 import com.springframework.spring5webapp.models.repositories.BookRepository;
+import com.springframework.spring5webapp.models.repositories.PublisherRepository;
 
 /**
  * @author Madhu
  *
  */
 @Component
+@Transactional
 public class devBootStrap implements ApplicationListener<ContextRefreshedEvent>{
 
 	/**
@@ -26,17 +30,22 @@ public class devBootStrap implements ApplicationListener<ContextRefreshedEvent>{
 	 */
 	private AuthorRepository authorRepo;
 	private BookRepository bookRepo;
+	private PublisherRepository publishRepo;
 	
-	
+
+
 	/**
 	 * @param authorRepo
 	 * @param bookRepo
+	 * @param publishRepo
 	 */
-	public devBootStrap(AuthorRepository authorRepo, BookRepository bookRepo) {
+	public devBootStrap(AuthorRepository authorRepo, BookRepository bookRepo, PublisherRepository publishRepo) {
 		super();
 		this.authorRepo = authorRepo;
 		this.bookRepo = bookRepo;
+		this.publishRepo = publishRepo;
 	}
+
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent arg0) {
@@ -44,6 +53,7 @@ public class devBootStrap implements ApplicationListener<ContextRefreshedEvent>{
 		initData();
 		
 	}
+	
 	
 	private void initData() { //Eric
 		Author eric = new Author("Eric", "Evans");
@@ -66,13 +76,17 @@ public class devBootStrap implements ApplicationListener<ContextRefreshedEvent>{
 		
 		Author john = new Author("John", "Dow");
 		Author jane = new Author("Jane", "Doe");
-	    Book  hfj = new Book("Head First Java", "123-456-789", new HashSet<Author>(){{
+		Publisher publish = new Publisher("Mcgraw Hill", "1 Main St", "Lansing", "MI", 48864);
+	    Book  hfj = new Book("Head First Java", "123-456-789", publish, new HashSet<Author>(){{
 			add(john);
 			add(jane);
+			add(eric);
 		}});
 	    
 	   bookRepo.save(hfj);
-	   
+	   for(Book book : bookRepo.findAll()) {
+		   System.out.println(book.toString());
+	   }
 	}
 	
 	

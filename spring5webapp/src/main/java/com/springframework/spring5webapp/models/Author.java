@@ -28,7 +28,7 @@ public class Author {
 	private String firstName;
 	private String lastName;
 	
-	@ManyToMany(mappedBy="authors", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy="authors", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Set<Book> books = new HashSet<Book>();
 	
 	/* (non-Javadoc)

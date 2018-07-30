@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.springframework.spring5webapp.dto.AuthorDto;
 import com.springframework.spring5webapp.dto.BookDto;
+import com.springframework.spring5webapp.dto.PublisherDto;
 import com.springframework.spring5webapp.models.Author;
 import com.springframework.spring5webapp.models.Book;
 import com.springframework.spring5webapp.models.repositories.AuthorRepository;
@@ -28,7 +29,7 @@ import com.springframework.spring5webapp.service.BookService;
  * @author ramachandranm1
  *
  */
-@Repository
+@Service
 public class BookServiceImpl implements BookService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BookServiceImpl.class);
@@ -68,8 +69,12 @@ public class BookServiceImpl implements BookService {
 		Set<Author> authors = new HashSet<Author>();
 
 		for(AuthorDto authorDto : bookDto.getAuthors()) {
-			Author author = new Author();
-			BeanUtils.copyProperties(authorDto, author);
+			 
+			Author author = authorRep.findOneByFirstNameAndLastName(authorDto.getFirstName(), authorDto.getLastName());
+			if(author == null) {
+				author	= new Author();
+				BeanUtils.copyProperties(authorDto, author);
+			}
 			authors.add(author);
 		}
 		
@@ -97,29 +102,29 @@ public class BookServiceImpl implements BookService {
 		 // fetch all books
 		List<BookDto> list = new ArrayList<BookDto>();
 		
-        for(Book book : bookRep.findAll()) {
-            logger.info(book.toString());
-                 
-            List<AuthorDto> authors = new ArrayList<AuthorDto>();
+       for(Book book : bookRep.findAll()) {
+           logger.info(book.toString());
+                
+           List<AuthorDto> authors = new ArrayList<AuthorDto>();
 
-    		for(Author author : book.getAuthors()) {
-    			AuthorDto authorDto = new AuthorDto();
-    			BeanUtils.copyProperties(author, authorDto);
-    			authors.add(authorDto);
-    		}
-    		
-    		BookDto bookDto = new BookDto(book.getId(), book.getISBN(), book.getTitle(),  authors);
-    		list.add(bookDto);
-            
-        }
-        
-        //Fetch all authors
-        for(Author author: authorRep.findAll()) {
-        	logger.info(author.toString());
-        }
-        
-        logger.info(authorRep.findByFirstNameAndLastName("Eric","Evans").get(0).toString());
-        
+   		for(Author author : book.getAuthors()) {
+   			AuthorDto authorDto = new AuthorDto();
+   			BeanUtils.copyProperties(author, authorDto);
+   			authors.add(authorDto);
+   		}
+   		
+   		
+   		PublisherDto publisher = new PublisherDto();
+   		if(book.getPublisher()!=null)
+   			BeanUtils.copyProperties(book.getPublisher(), publisher);
+   		
+   		BookDto bookDto = new BookDto(book.getId(), book.getISBN(), book.getTitle(),  authors, publisher);
+   		list.add(bookDto);
+           
+       }
+       
+ 
+       
 		return list;
 	}
 

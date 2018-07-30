@@ -29,6 +29,23 @@ public class BookDto implements Serializable{
 	private String ISBN;
 	private String title;
 	private List<AuthorDto> authors = new ArrayList<AuthorDto>();
+	private PublisherDto publisher;
+	
+	/**
+	 * @param id
+	 * @param iSBN
+	 * @param title
+	 * @param authors
+	 * @param publisher
+	 */
+	public BookDto(Long id, String iSBN, String title, List<AuthorDto> authors, PublisherDto publisher) {
+		super();
+		this.id = id;
+		ISBN = iSBN;
+		this.title = title;
+		this.authors = authors;
+		this.publisher = publisher;
+	}
 	/**
 	 * 
 	 */
@@ -44,23 +61,25 @@ public class BookDto implements Serializable{
 		this.title = title;
 		this.authors = authors;
 	}
+	
+	
 	/**
 	 * @return the id
 	 */
 	public Long getId() {
 		return id;
 	}
+	
 	/**
 	 * @param id
 	 * @param iSBN
 	 * @param title
-	 * @param authors
 	 */
-	public BookDto(Long id, String iSBN, String title, List<AuthorDto> authors) {
+	public BookDto(Long id, String iSBN, String title) {
+		super();
 		this.id = id;
 		ISBN = iSBN;
 		this.title = title;
-		this.authors = authors;
 	}
 	/**
 	 * @param id the id to set
@@ -103,6 +122,12 @@ public class BookDto implements Serializable{
 	 */
 	public void setAuthors(List<AuthorDto> authors) {
 		this.authors = authors;
+	}
+	public PublisherDto getPublisher() {
+		return publisher;
+	}
+	public void setPublisher(PublisherDto publisher) {
+		this.publisher = publisher;
 	}
 	
 	

@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springframework.spring5webapp.dto.AuthorDto;
 import com.springframework.spring5webapp.dto.BookDto;
 import com.springframework.spring5webapp.dto.ContactDto;
 import com.springframework.spring5webapp.dto.Greeting;
 import com.springframework.spring5webapp.models.Contact;
+import com.springframework.spring5webapp.service.AuthorService;
 import com.springframework.spring5webapp.service.BookService;
 import com.springframework.spring5webapp.service.ContactService;
 
@@ -27,6 +29,9 @@ public class MySpringController {
 	
 	@Autowired
 	BookService bookService;
+	
+	@Autowired
+	AuthorService authorService;
 
 	@RequestMapping(value = "/addContact")
 	public ContactDto addContact(@RequestBody ContactDto contactDto) {
@@ -71,6 +76,11 @@ public class MySpringController {
 	@RequestMapping("/fetchAllBooks")
 	public List<BookDto> fetchAllBooks(){
 		return bookService.fetchAllBooks();
+	}
+	
+	@RequestMapping("/getAllAuthors")
+	public List<AuthorDto> getAllAuthors(){
+		return authorService.getAllAuthors();
 	}
 
 	public MySpringController() {

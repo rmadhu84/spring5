@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 /**
  * @author ramachandranm1
@@ -30,6 +31,24 @@ public class Book {
 	private String ISBN;
 	private String title;
 	
+	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name="publisher_id")
+	private Publisher publisher;
+
+	/**
+	 * @param iSBN
+	 * @param title
+	 * @param publisher
+	 * @param authors
+	 */
+	public Book(String iSBN, String title, Publisher publisher, Set<Author> authors) {
+		super();
+		ISBN = iSBN;
+		this.title = title;
+		this.publisher = publisher;
+		this.authors = authors;
+	}
+
 
 	/**
 	 * @param iSBN
@@ -42,7 +61,7 @@ public class Book {
 	}
 
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 	@JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id"))
 	private Set<Author> authors = new HashSet<Author>();
 
@@ -82,8 +101,16 @@ public class Book {
 	                id, ISBN, title);
 	        if(authors != null) {	        	
 	        	for(Author author : authors) {
-	        		result +=String.format("Author[id=%d, FirstName='%s', LastName='%s']%n", author.getId().intValue(), author.getFirstName(), author.getLastName());
+				result += String.format("Author[id=%d, FirstName='%s', LastName='%s']%n", author.getId().intValue(),
+						author.getFirstName(), author.getLastName());
 	        	}
+	        }
+	        if(publisher != null) {
+			result += String.format(
+					"Publisher[id=%d, PublisherName='%s', AddressLine1='%s', AddressLine2='%s', City='%s', State='%s', Zipcode=%d]%n",
+					publisher.getId(), publisher.getPublisherName(), publisher.getAddressLine1(),
+					(publisher.getAddressLine2() != null) ? publisher.getAddressLine2() : "", publisher.getCity(),
+					publisher.getState(), publisher.getZipcode());
 	        }
 	        return result;
 	    }
@@ -201,6 +228,16 @@ public class Book {
 	 */
 	public void setAuthors(Set<Author> authors) {
 		this.authors = authors;
+	}
+
+
+	public Publisher getPublisher() {
+		return publisher;
+	}
+
+
+	public void setPublisher(Publisher publisher) {
+		this.publisher = publisher;
 	}
 
 }
