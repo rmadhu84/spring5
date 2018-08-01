@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Book List</h1>
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>Title</th>
+			<th>Publisher</th>
+		</tr>
+		<tr>
+		<tr th:each="bookDto : ${books}">
+			<td th:text="${bookDto.id}">123</td>
+		 	<td th:text="${bookDto.title}">Book Title</td>
+		 	 <td th:text="${bookDto.publisher.publisherName}">Publisher Name</td> 
+		</tr>
+		</tr>
+	</table>
+</body>
+</html>

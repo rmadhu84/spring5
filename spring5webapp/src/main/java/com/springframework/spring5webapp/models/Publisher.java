@@ -45,9 +45,10 @@ public class Publisher {
 	@NonNull private String city;
 	@NonNull private String state;
 	@NonNull private Integer zipcode;
+	private Integer zip4;
 	
-	@OneToOne(mappedBy="publisher", cascade=CascadeType.ALL)
+/*	@OneToOne(mappedBy="publisher", cascade=CascadeType.ALL)
 	private Book book;
-	
+	*/
 	
 }

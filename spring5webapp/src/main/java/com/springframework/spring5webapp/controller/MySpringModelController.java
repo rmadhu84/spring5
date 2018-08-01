@@ -1,12 +1,13 @@
 package com.springframework.spring5webapp.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springframework.spring5webapp.service.BookService;
 
-@RestController
+@Controller
 public class MySpringModelController {
 
 	private BookService books;

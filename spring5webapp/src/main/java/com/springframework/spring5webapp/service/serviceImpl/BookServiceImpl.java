@@ -118,7 +118,7 @@ public class BookServiceImpl implements BookService {
    		if(book.getPublisher()!=null)
    			BeanUtils.copyProperties(book.getPublisher(), publisher);
    		
-   		BookDto bookDto = new BookDto(book.getId(), book.getISBN(), book.getTitle(),  authors, publisher);
+   		BookDto bookDto = new BookDto(book.getId(), book.getTitle(), book.getISBN(),   authors, publisher);
    		list.add(bookDto);
            
        }
