@@ -74,7 +74,7 @@ public class devBootStrap implements ApplicationListener<ContextRefreshedEvent>{
 		authorRepo.save(rod);
 		bookRepo.save(noEJB);
 		
-		Author john = new Author("John", "Dow");
+		Author john = new Author("John", "Doe");
 		Author jane = new Author("Jane", "Doe");
 		Publisher publish = new Publisher("Mcgraw Hill", "1 Main St", "Lansing", "MI", 48864);
 	    Book  hfj = new Book("Head First Java", "123-456-789", publish, new HashSet<Author>(){{

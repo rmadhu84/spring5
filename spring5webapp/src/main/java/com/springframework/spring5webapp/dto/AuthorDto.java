@@ -17,6 +17,16 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class ,property="id", scope = AuthorDto.class)
 public class AuthorDto implements Serializable{
 
+	
+	private static final long serialVersionUID = 1171007862458306973L;
+
+	private Long id;
+	private String firstName;
+	private String lastName;
+	
+	private List<BookDto> books = new ArrayList<BookDto>();
+
+	
 	/**
 	 * @param id
 	 * @param firstName
@@ -30,15 +40,6 @@ public class AuthorDto implements Serializable{
 		this.books = books;
 	}
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1171007862458306973L;
-	private Long id;
-	private String firstName;
-	private String lastName;
-	
-	private List<BookDto> books = new ArrayList<BookDto>();
 
 	/**
 	 * @return the id
