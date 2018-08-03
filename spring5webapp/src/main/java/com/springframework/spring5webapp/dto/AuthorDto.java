@@ -26,7 +26,16 @@ public class AuthorDto implements Serializable{
 	
 	private List<BookDto> books = new ArrayList<BookDto>();
 
-	
+	public String getBooksListString() {
+		StringBuffer st = new StringBuffer();
+		
+		for(BookDto bookDto : books) {
+			st.append(bookDto.getTitle());
+			if(books.indexOf(bookDto) < books.size()-1)
+				st.append(", ");
+		}
+		return st.toString();
+	}
 	/**
 	 * @param id
 	 * @param firstName

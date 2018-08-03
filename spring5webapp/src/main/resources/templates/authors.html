@@ -18,7 +18,8 @@
 			<td th:text="${author.id}">123</td>
 		 	<td th:text="${author.firstName}">First Name</td>
 		 	 <td th:text="${author.lastName}">Last Name</td> 
-		 	 <td colspan=2> <p th:each="s : ${author.books}" th:text = "${#strings.toString(s.title)}"> </p></td>
+		 	 <!-- <td colspan=2> <p th:each="s : ${author.books}" th:text = "${#strings.toString(s.title)}"> </p></td> -->
+		 	 <td th:text="${author.getBooksListString()}"></td>
 		</tr>
 		</tr>
 	</table>
