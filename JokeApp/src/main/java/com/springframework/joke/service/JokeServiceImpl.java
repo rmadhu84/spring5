@@ -18,15 +18,25 @@ public class JokeServiceImpl implements JokeService {
 
 	private final ChuckNorrisQuotes chuckNorrisQuotes;
 	
-	public JokeServiceImpl() {
-		super();
-		this.chuckNorrisQuotes = new ChuckNorrisQuotes();
-	}
+//	public JokeServiceImpl() {
+//		super();
+//		this.chuckNorrisQuotes = new ChuckNorrisQuotes();
+//	}
 
+	
+	
 	@Override
 	public String getJoke() {
 		// TODO Auto-generated method stub
 		return chuckNorrisQuotes.getRandomQuote();
+	}
+
+	/**
+	 * @param chuckNorrisQuotes
+	 */
+	public JokeServiceImpl(ChuckNorrisQuotes chuckNorrisQuotes) {
+		super();
+		this.chuckNorrisQuotes = chuckNorrisQuotes;
 	}
 
 }
