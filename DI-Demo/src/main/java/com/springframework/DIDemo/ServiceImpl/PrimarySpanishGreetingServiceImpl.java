@@ -3,6 +3,8 @@
  */
 package com.springframework.DIDemo.ServiceImpl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,8 @@ import com.springframework.DIDemo.repository.GreetingRepository;
 public class PrimarySpanishGreetingServiceImpl implements GreetingService {
 
 	private GreetingRepository greetingRepo;
-
+	
+	private static final Logger logger = LoggerFactory.getLogger(PrimarySpanishGreetingServiceImpl.class);
 
 
 	/**
@@ -29,6 +32,7 @@ public class PrimarySpanishGreetingServiceImpl implements GreetingService {
 	public PrimarySpanishGreetingServiceImpl(GreetingRepository greetingRepo) {
 		super();
 		this.greetingRepo = greetingRepo;
+		logger.info("#### We are in Primary Spanish Greeting Service !!! ");
 	}
 
 
