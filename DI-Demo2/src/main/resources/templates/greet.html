@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Greetings</title>
+</head>
+<body>
+	<table border=1>
+		<th>
+		<td th:text="'Primary Greeting'">Primary Greeting</td>
+		<td th:text="'Constructor Based Greeting'">Constructor Greeting</td>
+		<td th:text="'Setter Based Greeting'">Constructor Greeting</td>
+		<td th:text="'Property Based Greeting'">Constructor Greeting</td>
+		</th>
+		<tr>
+			<td th:text="'Greeting'">Greeting</td>
+			<td th:text="${primaryGreet}">Primary Greeting</td>
+			<td th:text="${constructGreet}">construct Greeting</td>
+			<td th:text="${setterGreet}">setter Greeting</td>
+			<td th:text="${propertyGreet}">property Greeting</td>
+		</tr>
+	</table>
+</body>
+</html>

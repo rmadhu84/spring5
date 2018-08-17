@@ -19,7 +19,7 @@ public class DeutschGreetingRepositoryImpl implements GreetingRepository2 {
 	@Override
 	public String primaryGreet() {
 		// TODO Auto-generated method stub
-		return  new String("Hallo - Primäre Begrüßung in Englisch !!!");
+		return  new String("Hallo - Primäre Begrüßung auf Deutsch !!!");
 	}
 
 	@Override

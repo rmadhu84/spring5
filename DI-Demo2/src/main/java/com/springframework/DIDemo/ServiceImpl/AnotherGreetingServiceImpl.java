@@ -6,6 +6,7 @@ package com.springframework.DIDemo.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import com.springframework.DIDemo.Service.GreetingService;
+import com.springframework.DIDemo.repository.GreetingRepository2;
 
 /**
  * @author Madhu
@@ -14,11 +15,18 @@ import com.springframework.DIDemo.Service.GreetingService;
 @Service
 public class AnotherGreetingServiceImpl implements GreetingService {
 
+	private GreetingRepository2 greet;
+	
+	/**
+	 * @param greet
+	 */
+	public AnotherGreetingServiceImpl(GreetingRepository2 greet) {
+		this.greet = greet;
+	}
+
 	@Override
 	public String sayHello() {
-		// TODO Auto-generated method stub
-//		System.out.println("Injected by Another Constructor Greeting Service");
-		return new String("Injected by Another Constructor Greeting Service"); 
+		return greet.contructorInjectedGreet();
 	}
 
 }

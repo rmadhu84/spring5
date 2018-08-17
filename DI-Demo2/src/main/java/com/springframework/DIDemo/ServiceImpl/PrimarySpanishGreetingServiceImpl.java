@@ -40,8 +40,6 @@ public class PrimarySpanishGreetingServiceImpl implements GreetingService {
 
 	@Override
 	public String sayHello() {
-		// TODO Auto-generated method stub
-		//		System.out.println("Hola: desde el servicio de saludo primario");
 		return greetingRepo.primaryGreet();
 	}
 

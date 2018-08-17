@@ -50,8 +50,6 @@ BeanFactoryAware, ApplicationContextAware, DisposableBean {
 
 	@Override
 	public String sayHello() {
-		// TODO Auto-generated method stub
-//		System.out.println("Hello - From Primary Greeting Service");
 		return greetingRepo.primaryGreet();
 		
 	}

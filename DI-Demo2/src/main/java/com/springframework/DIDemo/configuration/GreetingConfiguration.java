@@ -3,6 +3,8 @@
  */
 package com.springframework.DIDemo.configuration;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -21,12 +23,33 @@ import com.springframework.DIDemo.repository.GreetingRepository2;
 @Configuration
 public class GreetingConfiguration {
 	
+	private static final Logger logger = LoggerFactory.getLogger(GreetingConfiguration.class);
+	
+			
 	@Bean
-	GreetingRepoFactory greetingRepoFactory() {
-		return new GreetingRepoFactory();
+	@Primary
+	@Profile({"default", "en"})
+	public GreetingRepository2 greetingRepo() {
+		logger.info("### Default Repository bean created");
+		return new GreetingRepoFactory().createRepository("en");
+	}
+
+	@Bean
+	@Primary
+	@Profile({"es"})
+	public GreetingRepository2 spanishGreetingRepo() {
+		logger.info("### Spanish Repository bean created");
+		return new GreetingRepoFactory().createRepository("es");
 	}
 	
-
+	@Bean
+	@Primary
+	@Profile({"de"})
+	public GreetingRepository2 deutschGreetingRepo() {
+		logger.info("### German Repository bean created");
+		return new GreetingRepoFactory().createRepository("de");
+	}
+	
 	@Bean
 	GreetingServiceFactory greetingServiceFactory(GreetingRepository2 greetingRepo) {
 		return new GreetingServiceFactory(greetingRepo);
