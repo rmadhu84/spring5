@@ -24,7 +24,7 @@ public class PropertyConfiguration {
 	@Autowired
 	Environment env;
 	
-	@Value("${com.usernanme}")
+	@Value("${com.username}")
 	String user;
 	
 	@Value("${com.password}")
