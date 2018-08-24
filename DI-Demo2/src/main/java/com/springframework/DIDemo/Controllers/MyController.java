@@ -27,6 +27,8 @@ public class MyController {
 	
 	public String hello() {
 		System.out.println(greetingService.sayHello());
+		
+		
 		return null;
 	}
 	
