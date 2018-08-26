@@ -1,0 +1,11 @@
+com:
+  username:  John
+  password:  ymlpwd
+  dburl:  "com.yml.url"
+  
+---
+spring:
+  profiles: es
+com:
+  username: John**in**Espanol
+    

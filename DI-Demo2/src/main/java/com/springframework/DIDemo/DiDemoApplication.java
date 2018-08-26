@@ -18,6 +18,7 @@ import com.springframework.DIDemo.Controllers.MyController;
 import com.springframework.DIDemo.Controllers.PropertyBasedInjectionController;
 import com.springframework.DIDemo.Controllers.SetterBasedInjecter;
 import com.springframework.DIDemo.customBeans.FakeDataSource;
+import com.springframework.DIDemo.customBeans.FakeJmsBroker;
 
 @SpringBootApplication
 @ComponentScan(basePackages= {"com.springframework"})
@@ -44,7 +45,13 @@ public class DiDemoApplication {
 		System.out.println(fakeDataSource.getUserName());
 		System.out.println(fakeDataSource.getPassword());
 		System.out.println(fakeDataSource.getDbURL());
-
+		
+		FakeJmsBroker jms = ctx.getBean(FakeJmsBroker.class);
+		System.out.println(jms.getUsername());
+		System.out.println(jms.getPwd());
+		System.out.println(jms.getURL());
+		System.out.println(jms.getDefaultProp());
+		
 //
 //		AnnotationConfigApplicationContext context =
 //				new AnnotationConfigApplicationContext();
