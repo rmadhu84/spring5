@@ -41,6 +41,7 @@ public class StackUsingQueue {
 		}
 		
 		static void push(int a) {
+			System.out.println("(1) size of Q2 = " + q2.size());
 			q2.add(a);
 			while(!q1.isEmpty()) {
 				q2.add(q1.poll());
@@ -49,6 +50,7 @@ public class StackUsingQueue {
 			q1 = q2;
 			q2 = q;
 			curr_size++;
+			System.out.println("(2)size of Q2 = " + q2.size());
 		}
 		
 		Stack(){
