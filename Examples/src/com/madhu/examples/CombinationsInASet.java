@@ -9,21 +9,33 @@ package com.madhu.examples;
  */
 public class CombinationsInASet {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		int[] arr = {1,2,3};
-		for(int i = 0; i<arr.length;i++) {
-			for(int j = i+1;j<arr.length;j++) {
-				if(j>arr.length)
-					j=0;
-				else if(j==i)
-					break;
-				System.out.println(arr[i]+","x);
-			}
-		}
-	}
+		int n = arr.length;
+		int r = arr.length;
+		printCominations(arr, n, r);
+	
 
+}
+/**
+ * 
+ * @param arr
+ * @param n
+ * @param r
+ */
+	private static void printCominations(int[] arr, int n, int r) {
+		int[] data = new int[r];
+		combinationsUtil(arr, data, 0,n-1, r);
+	}
+/**
+ * 
+ * @param arr
+ * @param data
+ * @param index
+ * @param start
+ * @param r
+ */
+	private static void combinationsUtil(int[] arr, int[] data, int index, int start, int r) {
+		
+	}
 }
