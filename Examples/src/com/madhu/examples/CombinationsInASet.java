@@ -4,6 +4,7 @@
 package com.madhu.examples;
 
 import java.util.Arrays;
+import java.util.Stack;
 
 /**
  * @author Madhu
@@ -14,13 +15,15 @@ public class CombinationsInASet {
 	/**
 	 * @param args
 	 */
-	// TODO Auto-generated method stub
+	/* arr[]  ---> Input Array 
+    data[] ---> Temporary array to store current combination 
+    start & end ---> Staring and Ending indexes in arr[] 
+    index  ---> Current index in data[] 
+    r ---> Size of a combination to be printed */
 	static void combinationUtil(int arr[], int data[], int start, int end, int index, int r) {
 		// Current combination is ready to be printed, print it
 		if (index == r) {
-			for (int j = 0; j < r; j++)
-				System.out.print(data[j] + " ");
-			System.out.println("");
+			printArray(data);
 			return;
 		}
 
@@ -32,6 +35,7 @@ public class CombinationsInASet {
 			data[index] = arr[i];
 //			printArray(data);
 			System.out.println(String.format("i=%d, start=%d, end=%d, r=%d, index=%d",i, start, end, r, index));
+			//combinationUtil(arr, data, start, end, index, r);
 			combinationUtil(arr, data, i + 1, end, index + 1, r);
 		}
 	}
@@ -42,13 +46,14 @@ public class CombinationsInASet {
 		// A temporary array to store all combination one by one
 		int data[] = new int[r];
 
-		// Print all combination using temprary array 'data[]'
+		// Print all combination using temprary array 'data[]'j
 		combinationUtil(arr, data, 0, n - 1, 0, r);
 	}
 
 	static void printArray(int[] data) {
 		System.out.println(Arrays.toString(data));
 	}
+	
 	/* Driver function to check for above function */
 	public static void main(String[] args) {
 		int arr[] = { 1, 2, 3, 4, 5 };
