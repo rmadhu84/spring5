@@ -16,14 +16,14 @@ public class BubbleSort {
 		for (;unsortedPartionindex > 0; unsortedPartionindex--) {
 			swapped = false;
 			for (int i = 0; i < unsortedPartionindex; i++) {
-				//System.out.println(Arrays.toString(inputArr));
+				System.out.println(Arrays.toString(inputArr));
 				if (inputArr[i] > inputArr[i + 1]) {
 					inputArr = swap(inputArr, i, i + 1);
 				}
 			}
 			
-			//System.out.println(String.format("Swapped : %b", swapped));
-//			System.out.println(Arrays.toString(inputArr));
+			System.out.println(String.format("Swapped : %b", swapped));
+			System.out.println(Arrays.toString(inputArr));
 			if(!swapped)
 				break;
 		}
