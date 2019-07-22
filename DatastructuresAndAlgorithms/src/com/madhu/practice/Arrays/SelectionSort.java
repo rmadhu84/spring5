@@ -13,8 +13,14 @@ public class SelectionSort {
 
 	public static void main(String[] args) {
 		int[] inputArr = {1,2,3,4,5,7,6};
-		int unsortedPartitionIndex = 4;
-		System.out.println(inputArr[LargestIndex(inputArr, unsortedPartitionIndex)]);
+		int unsortedPartitionIndex = inputArr.length-1;
+		//System.out.println(inputArr[LargestIndex(inputArr, unsortedPartitionIndex)]);
+		for(;unsortedPartitionIndex > 0; unsortedPartitionIndex--) {
+			int largestIndex = LargestIndex(inputArr, unsortedPartitionIndex);
+			swap(inputArr, largestIndex, unsortedPartitionIndex);
+		}
+		
+		System.out.println(Arrays.toString(inputArr));
 	}
 
 	private static int[] swap(int[] inputArr, int i, int j) {
@@ -22,7 +28,7 @@ public class SelectionSort {
 		int temp = inputArr[j];
 		inputArr[j] = inputArr[i];
 		inputArr[i] = temp;
-		System.out.println(Arrays.toString(inputArr));
+		//System.out.println(Arrays.toString(inputArr));
 		return inputArr;
 	}
 
