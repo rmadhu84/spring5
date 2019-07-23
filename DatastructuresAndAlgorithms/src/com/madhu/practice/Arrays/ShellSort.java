@@ -6,7 +6,7 @@ public class ShellSort {
 
 	public static void main(String[] args) {
 
-		int[] a = { 20, 35, -15, 7, 55, 1, -22 };
+		int[] a = { 20, 35, -15, 7, 55, -22 };
 		printArray(a);
 		int gap = 3;
 		int len = a.length - 1;
@@ -17,7 +17,7 @@ public class ShellSort {
 				k = a[i];
 				int j;
 				for (j = i; j - gap >= 0 && k < a[j - gap]; j = j - gap) {
-					a[i] = a[j - gap];
+					a[j] = a[j - gap];
 					printArray(a);
 				}
 				a[j] = k;
