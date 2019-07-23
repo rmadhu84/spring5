@@ -1,6 +1,7 @@
 package com.madhu.practice.Arrays;
 
 import java.util.Arrays;
+import com.madhu.practice.Arrays.Utils.Utility;
 
 public class BubbleSort {
 	static boolean swapped = false;
@@ -8,6 +9,7 @@ public class BubbleSort {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int[] inputArr = {26,52,35,11,10};
+		Utility util = new Utility();
 		
 		System.out.println("Input :" + Arrays.toString(inputArr));
 		
