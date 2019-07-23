@@ -18,8 +18,12 @@ public class InsertionSort2 {
 		int lastIndex = a.length;
 		printArray("Input Array: %s", a);
 		for (int lastSortedIndex = 1; lastSortedIndex < lastIndex; lastSortedIndex++) {
-			int k = a[lastSortedIndex];
+			int k = a[lastSortedIndex]; //Element to be inserted in its proper place in the sorted array.
 			int i;
+			/*Finding the insertion point. The loop will continue, as long as "i" is not at the last element and element ahead of "i" is greater than "k".
+			 * The loop will exit when "i" reaches zero or "i-1"th element is less than "k". 
+			 *
+			 */
 			for (i = lastSortedIndex; i > 0 && a[i - 1] > k; i--) {
 				a[i] = a[i - 1];
 			}
