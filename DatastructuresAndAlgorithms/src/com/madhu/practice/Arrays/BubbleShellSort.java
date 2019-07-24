@@ -13,9 +13,8 @@ public class BubbleShellSort {
 
 		util.printArray("Unsorted Array", a);
 		int len = a.length;
-		int gap = len / 2;
 
-		for (; gap > 0; gap = gap / 2) {
+		for (int gap = len / 2; gap > 0; gap = gap / 2) {
 			for (int i = gap; i < len; i++) {
 				for (int j = i; j - gap >= 0; j = j - gap)
 					if (a[j] < a[j - gap]) {
