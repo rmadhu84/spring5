@@ -26,10 +26,10 @@ public class InsertionSort2 {
 			 */
 			for (i = lastSortedIndex; i > 0 && a[i - 1] > k; i--) {
 				a[i] = a[i - 1];
-				printArray("%s", a);
+				printArray("Partially Sorted %s", a);
 			}
 			a[i] = k;
-			
+			printArray("Partially Sorted %s", a);
 		}
 		printArray("Sorted Array: %s", a);
 	}

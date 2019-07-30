@@ -1,5 +1,7 @@
 package com.madhu.practice.Arrays;
 
+import java.util.Arrays;
+
 import com.madhu.practice.Arrays.Utils.Utility;
 
 public class BubbleShellSort {
@@ -16,10 +18,10 @@ public class BubbleShellSort {
 
 		for (int gap = len / 2; gap > 0; gap = gap / 2) {
 			for (int i = gap; i < len; i++) {
-				for (int j = i; j - gap >= 0; j = j - gap)
-					if (a[j] < a[j - gap]) {
+				for (int j = i; j - gap >= 0 && a[j]<a[j-gap]; j = j - gap) {
 						swap(a, j, j - gap);
-					}
+						util.printArray("Partial Sorted Array", a);
+				}
 			}
 		}
 
@@ -27,11 +29,11 @@ public class BubbleShellSort {
 	}
 
 	private static int[] swap(int[] inputArr, int i, int j) {
+		System.out.println(String.format("Swapping the locations of %d and %d", inputArr[i], inputArr[j]));
 		int temp = inputArr[j];
 		inputArr[j] = inputArr[i];
 		inputArr[i] = temp;
 		swapped = true;
 		return inputArr;
 	}
-
 }
