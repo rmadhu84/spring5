@@ -27,16 +27,14 @@ public class SortingAlgorithmsTest {
 		
 		watch.start();
 
-		int lastIndex = b.length;
-		for (int lastSortedIndex = 1; lastSortedIndex < lastIndex; lastSortedIndex++) {
+		int lastIndex = b.length-1;
+		for (int lastSortedIndex = 1; lastSortedIndex <= lastIndex; lastSortedIndex++) {
 			int newElement = b[lastSortedIndex];
 			int i;
 			for (i = lastSortedIndex; i > 0 && b[i - 1] > newElement; i--) {
 				b[i] = b[i - 1];
-				//util.printArray("Partial Insertion sorted array", b);
 			}
 			b[i] = newElement;
-			//util.printArray("Partial Insertion sorted array", b);
 		}
 		watch.stop();
 		System.out.println("Time taken to Insertion sort : " + watch.getNanoTime());
