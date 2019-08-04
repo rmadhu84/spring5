@@ -3,10 +3,18 @@
  */
 package com.madhu.rest.Models;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,7 +35,18 @@ public class Student {
 	Long id;
 	String name;
 	
+	@NotNull
 	public Student(String name){
 		this.name = name;
+	}
+	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="student")
+	@JsonIgnoreProperties("student")
+	Set<Address> addresses = new HashSet<Address>(); 
+	
+	public Student addAddress(Address address) {
+		address.setStudent(this);
+		this.addresses.add(address);
+		return this;
 	}
 }

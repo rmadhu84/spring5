@@ -16,5 +16,6 @@ public interface MyRestService {
 	
 	public List<Word> findNoOfOccurance(String s);
 	public Student save(Student student);
+	public Student fetchStudent(String id);
 
 }

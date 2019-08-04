@@ -6,7 +6,6 @@ package com.madhu.rest.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
-import java.util.concurrent.TimeUnit;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.StopWatch;
@@ -54,7 +53,12 @@ public class MyRestServiceImpl implements MyRestService {
 		return repo.save(student);
 	}
 	
-	public MyRestServiceImpl( StudentRepository repo) {
+	public MyRestServiceImpl(StudentRepository repo) {
 		 this.repo = repo;
+	}
+
+	@Override
+	public Student fetchStudent(String id) {
+		return repo.findById(new Long(id)).get();
 	}
 }
