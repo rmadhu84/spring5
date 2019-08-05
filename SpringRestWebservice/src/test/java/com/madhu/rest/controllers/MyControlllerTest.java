@@ -31,6 +31,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.madhu.rest.Models.Address;
 import com.madhu.rest.Models.Student;
 import com.madhu.rest.POJO.Word;
+import com.madhu.rest.commands.AddressCommand;
+import com.madhu.rest.commands.StudentCommand;
 import com.madhu.rest.service.MyRestService;
 
 @RunWith(SpringRunner.class)
@@ -44,8 +46,8 @@ public class MyControlllerTest {
 	@Mock
 	MyRestService service;
 
-	private static Student student = new Student();
-	private static Address address = new Address();
+	private static StudentCommand student = new StudentCommand();
+	private static AddressCommand address = new AddressCommand();
 	private static final Long ID = 1L;
 
 	@Before

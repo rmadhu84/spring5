@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.madhu.rest.Models.Student;
+import com.madhu.rest.commands.StudentCommand;
 import com.madhu.rest.service.MyRestService;
 
 /**
@@ -37,13 +38,13 @@ public class MyController {
 	}
 	
 	@GetMapping(path = "/fetchStudent")
-	public ResponseEntity<Student> FetchStudent(@RequestParam(value = "id") String id) {
+	public ResponseEntity<StudentCommand> FetchStudent(@RequestParam(value = "id") String id) {
 		
 		return ResponseEntity.status(HttpStatus.OK).body(service.fetchStudent(id));
 	}
 	
 	@PostMapping(path ="/save")
-	public ResponseEntity<Student> save(@RequestBody Student student) {
+	public ResponseEntity<StudentCommand> save(@RequestBody StudentCommand student) {
 		return ResponseEntity.status(HttpStatus.OK).header("save", "http://locolhost:8080/save").body(service.save(student));
 	}
 
