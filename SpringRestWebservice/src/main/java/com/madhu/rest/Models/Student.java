@@ -35,11 +35,6 @@ public class Student {
 	Long id;
 	String name;
 	
-	@NotNull
-	public Student(String name){
-		this.name = name;
-	}
-	
 	@OneToMany(cascade=CascadeType.PERSIST, mappedBy="student")
 	@JsonIgnoreProperties("student")
 	Set<Address> addresses = new HashSet<Address>(); 
