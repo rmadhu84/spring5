@@ -3,7 +3,9 @@
  */
 package com.madhu.rest.service;
 
-import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
+
+import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +13,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.madhu.rest.Models.Address;
+import com.madhu.rest.Models.Student;
 import com.madhu.rest.converters.AddressCmdToMdlConverter;
 import com.madhu.rest.converters.AddressMdlToCmdConverter;
 import com.madhu.rest.converters.StudentCmdToMdlConverter;
@@ -23,6 +27,16 @@ import com.madhu.rest.service.impl.MyRestServiceImpl;
  *
  */
 public class MyRestServiceImplTest {
+
+	private static final Long ID = null;
+
+	private static final String NAME = null;
+
+	private static final String ADDRESS_LINE = null;
+
+	private static final String CITY = null;
+
+	private static final Integer ZIP = null;
 
 	MyRestService service;
 
@@ -80,8 +94,20 @@ public class MyRestServiceImplTest {
 	@Test
 	public void testFetchStudent() {
 		// given
+		Student command = new Student();
+		Address addressCommand = new Address();
+		command.setId(ID);
+		command.setName(NAME);
+		addressCommand.setAddress_line(ADDRESS_LINE);
+		addressCommand.setCity(CITY);
+		addressCommand.setId(ID);
+		addressCommand.setZip(ZIP);
+		command.addAddress(addressCommand);
+		Optional<Student> student = Optional.of(command);
 		// when
+		when(repo.findById(ID)).thenReturn(student);
 		// then
+		
 	}
 
 }

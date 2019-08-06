@@ -40,7 +40,7 @@ public class Student {
 		this.name = name;
 	}
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="student")
+	@OneToMany(cascade=CascadeType.PERSIST, mappedBy="student")
 	@JsonIgnoreProperties("student")
 	Set<Address> addresses = new HashSet<Address>(); 
 	
