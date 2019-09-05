@@ -20,6 +20,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.mock.http.server.reactive.MockServerHttpResponse;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -30,6 +31,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.madhu.rest.Models.Address;
 import com.madhu.rest.Models.Student;
+import com.madhu.rest.POJO.SentenceRequest;
 import com.madhu.rest.POJO.Word;
 import com.madhu.rest.commands.AddressCommand;
 import com.madhu.rest.commands.StudentCommand;
@@ -37,7 +39,7 @@ import com.madhu.rest.service.MyRestService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MyControlllerTest {
+public class MyControllerTest {
 
 	MyController controller;
 
@@ -49,6 +51,8 @@ public class MyControlllerTest {
 	private static StudentCommand student = new StudentCommand();
 	private static AddressCommand address = new AddressCommand();
 	private static final Long ID = 1L;
+	
+	private static SentenceRequest sentence ;
 
 	@Before
 	public void setUp() throws Exception {
@@ -63,20 +67,30 @@ public class MyControlllerTest {
 		address.setCity("Okemos");
 		address.setZip(48864);
 		student.addAddress(address);
+		sentence = new SentenceRequest("a b");
 
 	}
 
 	@Test
 	public final void testProcess() throws Exception {
 		// fail("Not yet implemented"); // TODO
+		//given
 		List<Word> words = new ArrayList<Word>();
 		words.add(new Word("a", 1));
 		words.add(new Word("b", 1));
+		String expected = asJsonString(words);
+		//when
 		when(service.findNoOfOccurance(Mockito.anyString())).thenReturn(words);
-		mvc.perform(get("/process?para=this is a test")).andExpect(MockMvcResultMatchers.status().isOk());
+		//mvc.perform(get("/process?para=this is a test")).andExpect(MockMvcResultMatchers.status().isOk());
+		
+		//then
+		MvcResult result = mvc.perform(post("/process").contentType(MediaType.APPLICATION_JSON).content(asJsonString(sentence))).andReturn();
+		
+		MockHttpServletResponse response = result.getResponse();
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+		assertEquals(result.getRequest().getRequestURL().toString(), response.getHeader("process"));
+		assertEquals(expected, response.getContentAsString());
 		verify(service, times(1)).findNoOfOccurance(Mockito.anyString());
-		mvc.perform(get("/process?para=")).andExpect(MockMvcResultMatchers.status().isBadRequest());
-
 	}
 
 	@Test
@@ -90,7 +104,7 @@ public class MyControlllerTest {
 				.andReturn();
 		MockHttpServletResponse response = result.getResponse();
 		assertEquals(HttpStatus.OK.value(), response.getStatus());
-		assertEquals("http://locolhost:8080/save", response.getHeader("save"));
+		assertEquals(result.getRequest().getRequestURL().toString(), response.getHeader("save"));
 		assertEquals(expected, response.getContentAsString());
 		verify(service, times(1)).save(any());
 	}

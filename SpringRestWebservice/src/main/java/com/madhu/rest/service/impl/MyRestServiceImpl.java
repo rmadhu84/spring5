@@ -43,7 +43,7 @@ public class MyRestServiceImpl implements MyRestService {
 			} else
 				map.put(a, new Word(a, 1));
 		}
-		map.forEach((k, v) -> System.out.println(k + "->" + v.getN()));
+		//map.forEach((k, v) -> System.out.println(k + "->" + v.getN()));
 		List<Word> words = new ArrayList<Word>();
 		map.forEach((k, v) -> words.add(v));
 		watch.stop();
