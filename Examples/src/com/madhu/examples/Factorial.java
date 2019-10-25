@@ -19,27 +19,19 @@ public class Factorial {
 		// TODO Auto-generated method stub
 		Scanner in = new Scanner(System.in);
 		int input = in.nextInt();
-		System.out.println(String.format("Factorial of %d is %d", input, factorial(input)));
+		System.out.println(String.format("Factorial of %d is %f", input, factorial(input)));
 	}
-	
-	static int factorial(int n) {
-		int result = 1;
-		while(n>0) {
-			System.out.println(n);
-			result = result*n;
-			n--;
+
+	private static double factorial(int input) {
+
+		if (input == 1 || input == 0) {
+			System.out.print(String.format("%d", input));
+			System.out.println("");
+			return 1;
+		} else {
+			System.out.print(String.format("%d * ", input));
+			return (input * factorial(--input));
 		}
-		return result;
 	}
-	
-	static int factorialWithRecursion(int n) {
-		
-		 
-		
-		while (n!=1) {
-			return factorialWithRecursion(n-1) ;
-		}
-		
-		}
 
 }
