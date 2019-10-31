@@ -10,7 +10,7 @@ package com.madhu.HackerRank;
 import java.io.*;
 import java.util.*;
 
-public class Solution {
+public class ChangetoCamelCase {
 
     public static void main(String[] args) {
         
