@@ -1,0 +1,14 @@
+Start Docker-machine virtualbox:
+    docker-machine start default
+
+Connect your shell to the Docker machine:
+    eval $(docker-machine env default)
+
+Build docker image: 
+    docker build -t springio/hello .
+
+Run a docker image
+    docker run -p 80:80 --name mycontainer -t springio/hello
+
+stop Docker-machine
+    docker-machine stop default
