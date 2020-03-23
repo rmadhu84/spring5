@@ -15,4 +15,5 @@ public interface CarsService {
 	public List<CarsModel> getAllCars();
 	public CarsModel add(CarsModel model);
 	public String generateReport(String format);
+	String generateReportUsingJdbcConn(String format) throws Exception;
 }

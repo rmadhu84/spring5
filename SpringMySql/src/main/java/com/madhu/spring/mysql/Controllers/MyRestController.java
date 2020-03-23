@@ -27,32 +27,50 @@ import com.madhu.spring.mysql.Service.CarsService;
  *
  */
 @RestController
-@RequestMapping(value ="/mySql")
+@RequestMapping(value = "/mySql")
 public class MyRestController {
-	
+
 	CarsService service;
-	
+
 	public MyRestController(CarsService service) {
 		super();
 		this.service = service;
 	}
 
-	@GetMapping(value="/fetchAllCars")
-	public ResponseEntity<Object> getAllCars(){
+	@GetMapping(value = "/fetchAllCars")
+	public ResponseEntity<Object> getAllCars() {
 		List<CarsModel> model = new ArrayList<CarsModel>();
 		model = service.getAllCars();
 		return ResponseEntity.status(HttpStatus.OK).body(model);
 	}
-	
+
 	@PostMapping(value = "/add")
-	public ResponseEntity<Object> add(@Valid @RequestBody  CarsModel car){
-		return  ResponseEntity.status(HttpStatus.OK).body(service.add(car));
+	public ResponseEntity<Object> add(@Valid @RequestBody CarsModel car) {
+		return ResponseEntity.status(HttpStatus.OK).body(service.add(car));
 	}
-	
+
 	@GetMapping(value = "/generate/{format}")
-	public ResponseEntity<Object> generateReport(@PathVariable String format){
+	public ResponseEntity<Object> generateReport(@PathVariable String format) {
 		System.out.println(String.format("Format = %s", format));
-		service.generateReport(format);
-		return ResponseEntity.status(HttpStatus.OK).body("Report Generated");
+		try {
+			service.generateReport(format);
+			return ResponseEntity.status(HttpStatus.OK).body("Report Generated");
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.OK).body("Report Generation Failed");
+		}
+
 	}
+
+	@GetMapping(value = "/create/{format}")
+	public ResponseEntity<Object> createReport(@PathVariable String format) {
+		System.out.println(String.format("Format = %s", format));
+		try {
+		service.generateReportUsingJdbcConn(format);
+		return ResponseEntity.status(HttpStatus.OK).body("Report Generated");
+		}catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.OK).body("Report Generation Failed");
+		}
+		
+	}
+
 }

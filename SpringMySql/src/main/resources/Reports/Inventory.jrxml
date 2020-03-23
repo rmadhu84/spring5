@@ -2,7 +2,9 @@
 <!-- Created with Jaspersoft Studio version 6.12.0.final using JasperReports Library version 6.12.1-ac0eebdb29e4c0985457bab279a6db744d661530  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Inventory" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="70cdc615-7f03-4216-afaa-b4d538202706">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySqlDataAdapter"/>
+	<parameter name="createdBy" class="java.lang.String">
+		<parameterDescription><![CDATA[""]]></parameterDescription>
+	</parameter>
 	<queryString language="SQL">
 		<![CDATA[select make, model, year from spring.cars order by make, model]]>
 	</queryString>
@@ -39,6 +41,10 @@
 					</textElement>
 					<text><![CDATA[Inventory]]></text>
 				</staticText>
+				<textField>
+					<reportElement x="20" y="70" width="101" height="20" uuid="aec73252-eb2c-40c8-b063-ae3f94445872"/>
+					<textFieldExpression><![CDATA[$P{createdBy}]]></textFieldExpression>
+				</textField>
 			</frame>
 		</band>
 	</title>

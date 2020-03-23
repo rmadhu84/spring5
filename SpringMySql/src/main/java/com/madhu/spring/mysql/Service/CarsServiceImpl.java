@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
@@ -36,19 +38,21 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 @Service
 public class CarsServiceImpl implements CarsService {
 	
-	String PATH = "/Users/Madhu/GitProjects/SpringMySql/src/main/resources/GeneratedDocs/";
+	String PATH = "/Users/Madhu/GitProjects/spring5/SpringMySql/src/main/resources/GeneratedDocs/";
 
 	CarsRepository carRepo;
 	CarsEntityToModelConverter entityToMdl;
 	CarsModelToEntityConverter mdlToEntity;
+	DataSource datasoure;
 
 	@Autowired
 	public CarsServiceImpl(CarsRepository carRepo, CarsEntityToModelConverter entityToMdl,
-			CarsModelToEntityConverter mdlToEntity) {
+			CarsModelToEntityConverter mdlToEntity, DataSource dataSource) {
 		super();
 		this.carRepo = carRepo;
 		this.entityToMdl = entityToMdl;
 		this.mdlToEntity = mdlToEntity;
+		this.datasoure = dataSource;
 	}
 
 	@Override
@@ -96,5 +100,38 @@ public class CarsServiceImpl implements CarsService {
 		return "";
 
 	}
+	
+	@Override
+	public String generateReportUsingJdbcConn(String format) {
+		
+		
+		Connection conn = null;
+		// Load file and compile
+		try {
+			conn = datasoure.getConnection();
+			File file = ResourceUtils.getFile("classpath:Reports/Inventory.jrxml");
+			JasperReport jr = JasperCompileManager.compileReport(file.getAbsolutePath());
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("createdBy", "Madhu Ram");
+			JasperPrint jp = JasperFillManager.fillReport(jr, params, conn);
+			switch (format) {
+			case "html":
+				JasperExportManager.exportReportToHtmlFile(jp, PATH+"Invertory.html");
+				break;
+			case "pdf":
+				JasperExportManager.exportReportToPdfFile(jp, PATH+"Invertory.pdf");
+				break;
+			default:
+				break;
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+
+	}
+
 
 }
